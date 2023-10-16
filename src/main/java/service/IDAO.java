@@ -9,4 +9,8 @@ public interface IDAO {
      <T> void insert(T entity);
     //UPDATE
     <T> T update(T entity);
+
+    <T> void remove(T entity);
+
+    <T> T findById(Class<T> clazz,Integer id);
 }

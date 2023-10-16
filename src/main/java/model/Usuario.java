@@ -26,7 +26,10 @@ public class Usuario {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName) throws Exception{
+        if (firstName.length() == 0 ) {
+            throw new Exception("not allowed the firstName to be empty");
+        }
         this.firstName = firstName;
     }
 

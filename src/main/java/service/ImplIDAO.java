@@ -43,6 +43,21 @@ public class ImplIDAO implements IDAO{
 
     @Override
     public <T> T update(T entity) {
+        EntityManager em = EntityManagerAdmin.getInstance();
+        try {
+            em.getTransaction().begin();
+            T ent = em.merge(entity);
+            em.flush();
+            em.getTransaction().commit();
+            return ent;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        finally {
+           em.close();
+        }
         return null;
     }
 }
