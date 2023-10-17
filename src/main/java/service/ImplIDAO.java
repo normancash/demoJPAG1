@@ -60,4 +60,38 @@ public class ImplIDAO implements IDAO{
         }
         return null;
     }
+
+    @Override
+    public <T> T findById(Class<T> clazz, Integer id) {
+        EntityManager em = EntityManagerAdmin.getInstance();
+        try {
+            T entity = em.find(clazz,id);
+            return entity;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public <T> void remove(T entity) {
+        EntityManager em = EntityManagerAdmin.getInstance();
+        try {
+            em.getTransaction().begin();
+            em.remove(em.merge(entity));
+            em.flush();
+            em.getTransaction().commit();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        finally {
+            em.close();
+        }
+    }
 }
