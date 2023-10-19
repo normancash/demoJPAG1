@@ -1,14 +1,12 @@
 package test;
 
-import model.Carrera;
-import model.Curso;
-import model.Estudiante;
-import model.Usuario;
+import model.*;
 import service.EntityManagerAdmin;
 import service.IDAO;
 import service.ImplIDAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Main {
@@ -31,7 +29,7 @@ public class Main {
         System.out.println(lista);
     }*/
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         IDAO dao = new ImplIDAO();
         Estudiante estudiante = new Estudiante();
         estudiante.setId(1);
@@ -49,5 +47,26 @@ public class Main {
         cursos.add(curso1);
         estudiante.setCurso(cursos);
         dao.insert(estudiante);
+    }*/
+
+    public static void main(String[] args) {
+        IDAO dao = new ImplIDAO();
+        List<Medicamento> listaMedicamento = new ArrayList<>();
+        Medicamento medicamento = new Medicamento();
+        medicamento.setId(1);
+        medicamento.setNombre("Aspirina");
+        dao.insert(medicamento);
+        listaMedicamento.add(medicamento);
+        Medicamento medicamento1 = new Medicamento();
+        medicamento1.setId(2);
+        medicamento1.setNombre("Acetaminofen");
+        dao.insert(medicamento1);
+        listaMedicamento.add(medicamento1);
+        Receta receta = new Receta();
+        receta.setId(1);
+        receta.setFecha(new Date());
+        receta.setNombre("Norman");
+        receta.setListaMedicamento(listaMedicamento);
+        dao.insert(receta);
     }
 }
